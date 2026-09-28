@@ -20,9 +20,14 @@ is needed in the client or on the server**.
 4. **The website dashboard** fetches `GET /api/website/download` (the Supabase record) and shows the
    Download button with the same GitHub URL.
 
-## Important notes
+## Testing auto-update locally
 
-- The `.exe` is uploaded as a **release asset**, never committed to the repo —
-  GitHub's commit limit is 100 MB per file, but release assets allow up to 2 GB.
-- The repository must stay **public** or the bot's unauthenticated API call returns 404.
-- `release-manifest.json` is metadata only (a human-readable history).
+1. Install `MarketFlow-Setup-1.0.0.exe` on a test PC. The bot reports `v1.0.0`.
+2. Publish `v1.0.1` (tag + `.exe` asset) to this repo — `releases/latest` now returns v1.0.1.
+3. Launch the bot (or Settings → Check for Updates): it sees v1.0.1 > v1.0.0 and shows
+   "Update available" → **Update Now** downloads and quietly installs 1.0.1.
+4. Relaunch: bot is v1.0.1, no more prompt.
+
+> The `.exe` is a **release asset**, never committed to the repo — GitHub's commit
+> limit is 100 MB per file, but release assets allow up to 2 GB.
+> The repository must stay **public** or the bot's unauthenticated API call returns 404.
